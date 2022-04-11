@@ -1,6 +1,6 @@
-language: node_js
-node_js:
-  - 13
+language: java
+jdk:
+  - openjdk11
 
 services:
   - docker
@@ -16,7 +16,7 @@ before_script:
 script:
   - docker --version # print the version for logging
   - docker build -t simple-ktor .
-  - docker tag simple-node sergeikarimov/simple-ktor:latest
+  - docker tag simple-ktor sergeikarimov/simple-ktor:latest
 
 # Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
 after_success:
