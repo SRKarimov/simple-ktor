@@ -4,7 +4,7 @@ FROM openjdk:${VERSION}-jdk as BUILD
 
 COPY . /src
 WORKDIR /src
-RUN ./gradlew --no-daemon install
+RUN ./gradle --no-daemon install
 
 FROM openjdk:${VERSION}-jre
 
