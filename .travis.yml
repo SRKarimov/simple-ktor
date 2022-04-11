@@ -5,6 +5,9 @@ jdk:
 services:
   - docker
 
+before_install:
+  - chmod +x gradlew
+
 # Pre-testing installs
 install:
   - echo "nothing needs to be installed"
