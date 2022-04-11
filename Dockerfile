@@ -1,11 +1,14 @@
-FROM openjdk:8-jdk
+ARG VERSION=11
 
-EXPOSE 8080:8080
+FROM openjdk:${VERSION}-jdk as BUILD
 
-RUN mkdir /app
+COPY . /src
+WORKDIR /src
+RUN ./gradlew --no-daemon install
 
-COPY ./build/install/simple-ktor/ /app/
+FROM openjdk:${VERSION}-jre
 
-WORKDIR /app/bin
+COPY --from=BUILD /src/build/libs/simple-ktor*.jar /bin/runner/simple-ktor.jar
+WORKDIR /bin/runner
 
-CMD ["./simple-ktor"]
+CMD ["java","-jar","simple-ktor.jar"]
